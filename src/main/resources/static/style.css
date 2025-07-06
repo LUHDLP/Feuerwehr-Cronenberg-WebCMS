@@ -1,0 +1,330 @@
+:root {
+  --primary: #a70000;
+  --primary-dark: #670000;
+  --accent: #ffcb00;
+  --white: #fff;
+  --bg-light: #f9f9f9;
+  --gray-light: #f0f0f0;
+  --gray-dark: #333;
+  --text-dark: #1c1c1c;
+  --text-light: #fff;
+  --radius-sm: 8px;
+  --radius-lg: 16px;
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-strong: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --transition: 0.3s ease;
+  --max-width: 1240px;
+  --spacing: 2rem;
+  --font-main: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* ========== GLOBAL ========== */
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background: var(--bg-light);
+  color: var(--text-dark);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  scroll-behavior: smooth;
+}
+
+#wrapper {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--spacing) 1.5rem;
+}
+
+/* ========== HEADER ========== */
+header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: var(--text-light);
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  box-shadow: var(--shadow-strong);
+}
+
+#logo img {
+  height: 80px;
+  max-width: 100%;
+}
+
+/* ========== NAVIGATION ========== */
+#nav-main {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+#nav-main ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin: 0;
+  padding: 0;
+}
+
+#nav-main a {
+  color: var(--text-light);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition);
+}
+
+#nav-main a:hover,
+#nav-main a:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ========== HERO / IMAGE ========== */
+#image-main img,
+#image-slider img {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: cover;
+  margin: 2rem 0;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  animation: fadeIn 0.6s ease;
+}
+
+/* ========== INTRO ========== */
+#startseite-intro {
+  background: var(--white);
+  padding: 3rem 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+  margin-bottom: var(--spacing);
+  animation: fadeInUp 0.6s ease;
+}
+
+#startseite-intro h1 {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 1.2rem;
+}
+
+#startseite-intro p {
+  max-width: 850px;
+  margin: 0 auto;
+  font-size: 1.15rem;
+  color: var(--gray-dark);
+}
+
+/* ========== TEASER / NEWS BOXES ========== */
+.grid,
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-bottom: var(--spacing);
+}
+
+.teaser,
+.news-box {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--transition), box-shadow var(--transition);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  animation: fadeInUp 0.5s ease;
+}
+
+.teaser:hover,
+.news-box:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-strong);
+}
+
+.teaser img,
+.news-box img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.teaser a,
+.news-box {
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.teaser h2,
+.news-box b span {
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
+  color: var(--primary-dark);
+}
+
+.news-box i {
+  font-style: normal;
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 0.3rem;
+}
+
+.teaser p {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* ========== ASIDE TEASER NEXT ========== */
+#teaser-next {
+  text-align: center;
+  margin-top: var(--spacing);
+}
+
+#teaser-next img {
+  max-width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--transition);
+}
+
+#teaser-next img:hover {
+  transform: scale(1.02);
+}
+
+#teaser-next h2 {
+  margin-top: 1rem;
+  font-size: 1.6rem;
+  color: var(--accent);
+}
+
+/* ========== FOOTER ========== */
+footer {
+  background: var(--primary-dark);
+  color: var(--text-light);
+  padding: 3rem 2rem;
+  margin-top: var(--spacing);
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+footer h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+footer address {
+  font-style: normal;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+#nav-footer ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0;
+}
+
+#nav-footer a {
+  color: var(--text-light);
+  font-weight: 500;
+  text-decoration: underline;
+  transition: color var(--transition);
+}
+
+#nav-footer a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ========== FORM SEARCH (z. B. im Footer) ========== */
+#footer-search {
+  margin-top: 1rem;
+}
+
+#footer-search input[type="search"] {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  max-width: 300px;
+  margin-right: 0.5rem;
+}
+
+#footer-search button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+#footer-search button:hover {
+  background: #d3a000;
+}
+
+/* ========== PAGE TOP ========== */
+.page-top {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.page-top a {
+  font-size: 0.9rem;
+  color: #ddd;
+  text-decoration: none;
+}
+
+.page-top a:hover {
+  text-decoration: underline;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #nav-main ul {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  #nav-main a {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .grid,
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+}
