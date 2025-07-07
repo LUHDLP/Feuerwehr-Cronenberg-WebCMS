@@ -1,5 +1,3 @@
-@param de.deinprojekt.model.StartseitenContent content
-
 @template.layout.layout(
 title = "Startseite | Feuerwehr Cronenberg",
 banner = null,
