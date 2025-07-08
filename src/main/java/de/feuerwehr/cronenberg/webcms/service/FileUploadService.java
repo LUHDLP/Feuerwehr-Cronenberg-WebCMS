@@ -4,29 +4,35 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.UUID;
 
 @Service
 public class FileUploadService {
 
-    private static final String UPLOAD_DIR = "uploads"; // kein Slash am Ende
+    // Zielverzeichnis (relativ zum Projekt-Root)
+    private static final Path UPLOAD_DIR = Paths.get("uploads").toAbsolutePath();
 
     public String save(MultipartFile file) throws IOException {
-        // Zielverzeichnis sicherstellen
-        Path uploadDirPath = Paths.get(UPLOAD_DIR);
-        Files.createDirectories(uploadDirPath); // <- wichtig!
+        if (file == null || file.isEmpty()) {
+            throw new IllegalArgumentException("Leere Datei kann nicht gespeichert werden.");
+        }
 
-        // Dateiname generieren
-        String filename = UUID.randomUUID() + "_" + file.getOriginalFilename();
-        Path destination = uploadDirPath.resolve(filename);
+        // Upload-Verzeichnis sicherstellen
+        Files.createDirectories(UPLOAD_DIR);
+
+        // Original-Dateiname sichern (nur Name, keine Pfade)
+        String originalFilename = Paths.get(file.getOriginalFilename()).getFileName().toString();
+
+        // Eindeutigen Dateinamen erzeugen
+        String filename = UUID.randomUUID() + "_" + originalFilename;
+        Path destination = UPLOAD_DIR.resolve(filename);
 
         // Datei speichern
         file.transferTo(destination.toFile());
 
-        // Pfad, der im <img src="..."> angezeigt wird
+        // Pfad für <img src="/uploads/xyz.jpg"> (Webzugriff)
         return "/uploads/" + filename;
     }
 }
+

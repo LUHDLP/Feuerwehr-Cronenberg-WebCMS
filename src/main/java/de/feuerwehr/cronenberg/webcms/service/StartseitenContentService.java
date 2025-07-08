@@ -23,8 +23,12 @@ public class StartseitenContentService {
         });
     }
 
-    public void saveContent(StartseitenContent content) {
-        content.setId(1L);
-        repo.save(content);
+    public void saveContent(StartseitenContent updated) {
+        StartseitenContent existing = repo.findById(1L).orElseThrow();
+        existing.setWillkommenstext(updated.getWillkommenstext());
+        existing.setImage1(updated.getImage1());
+        existing.setImage2(updated.getImage2());
+        repo.save(existing);
     }
+
 }

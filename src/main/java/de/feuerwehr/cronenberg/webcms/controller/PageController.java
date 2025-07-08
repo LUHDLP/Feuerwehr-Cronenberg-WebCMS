@@ -20,7 +20,7 @@ public class PageController {
     public String index(Model model) {
         StartseitenContent content = contentService.getContent();
         model.addAttribute("content", content);
-        return "index"; // lädt index.jte mit dynamischem Inhalt
+        return "index";
     }
 
     @GetMapping("/einsatzabteilung")
