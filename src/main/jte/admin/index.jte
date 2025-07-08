@@ -8,6 +8,7 @@ content = @`
         <ul>
             <li><a href="/admin/startseite">Startseite bearbeiten</a></li>
             <li><a href="/admin/news">News verwalten</a></li>
+            <li><a href="/admin/slider">Slider verwalten</a></li>
             <!-- Weitere Links folgen z. B. für Team, Downloads -->
         </ul>
     </section>
