@@ -491,15 +491,15 @@ header {
 }
 
 .rsts-slides {
-  display: flex;
-  transition: transform 0.5s ease;
+  display: block; /* statt flex */
 }
 
 .rsts-slide {
-  min-width: 100%;
-  transition: transform 0.5s ease;
+  width: 100%;         /* statt min-width */
+  margin-bottom: 2em;  /* Abstand zwischen den Slides */
   position: relative;
 }
+
 
 .rsts-slide img {
   width: 100%;
@@ -690,3 +690,4 @@ p, a, li {
   opacity: 1;
   transform: translateY(0);
 }
+

@@ -1,9 +1,12 @@
+@import de.feuerwehr.cronenberg.webcms.model.HomeSlide
 @import de.feuerwehr.cronenberg.webcms.model.News
 @import java.util.List
 @import java.time.format.DateTimeFormatter
 
 @param de.feuerwehr.cronenberg.webcms.model.StartseitenContent content
 @param List<News> newsList
+@param List<de.feuerwehr.cronenberg.webcms.model.HomeSlide> slides
+
 
 @template.layout.layout(
 title = "Startseite | Feuerwehr Cronenberg",
@@ -14,35 +17,28 @@ content = @`
             <div class="rsts-view">
                 <div class="rsts-crop">
                     <div class="rsts-slides">
-                        <div class="rsts-slide rsts-slide-default rsts-active">
-                            <div data-rsts-name="Mannschaftsfoto">
-                                <div class="home-slide ce_rsce_aurelium_home_slide">
-                                    <div class="image-wrap">
-                                        <img src="${content.getImage1()}" alt="Mannschaftsfoto" width="816" height="577">
-                                    </div>
-                                    <div class="text-wrap">
-                                        <section></section>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @for(HomeSlide slide : slides)
+                            <div class="rsts-slide rsts-slide-default">
+                                <div data-rsts-name="${slide.getTitel()}">
+                                    <div class="home-slide ce_rsce_aurelium_home_slide">
+                                        <div class="image-wrap">
+                                            <img src="${slide.getImageUrl()}" alt="${slide.getTitel()}" />
 
-                        <div class="rsts-slide rsts-slide-default rsts-inactive">
-                            <div data-rsts-name="Willkommen">
-                                <div class="home-slide ce_rsce_aurelium_home_slide">
-                                    <div class="image-wrap">
-                                        <img src="${content.getImage2()}" alt="Willkommen" width="816" height="577">
-                                    </div>
-                                    <div class="text-wrap">
-                                        <section>
-                                            <h1>Willkommen</h1>
-                                            <p>${content.getWillkommenstext()}</p>
-                                        </section>
+                                        </div>
+                                        <div class="text-wrap">
+                                            <section>
+                                                <h1>${slide.getTitel()}</h1>
+                                                <p>${slide.getText()}</p>
+                                                @if(slide.getLinkUrl() != null && !slide.getLinkUrl().isEmpty()) {
+                                                    <a href="${slide.getLinkUrl()}" class="btn">${slide.getLinkText()}</a>
+                                                    }
+                                                @endif
+                                            </section>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- weitere Slides können ergänzt werden -->
+                        @endfor
                     </div>
 
                     <a href="#" class="rsts-prev"><span class="rsts-prev-label">Zurück</span></a>
@@ -52,8 +48,9 @@ content = @`
 
             <div class="rsts-nav rsts-nav-bullets">
                 <ul>
-                    <li class="rsts-nav-item"><a href="#" class="active">Mannschaftsfoto</a></li>
-                    <li class="rsts-nav-item"><a href="#">Willkommen</a></li>
+                    @for(HomeSlide slide : slides)
+                        <li class="rsts-nav-item"><a href="#">${slide.getTitel()}</a></li>
+                    @endfor
                 </ul>
             </div>
         </div>
