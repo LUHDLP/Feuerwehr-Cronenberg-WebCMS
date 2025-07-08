@@ -7,7 +7,8 @@ content = @`
         <p>Willkommen im internen Bereich.</p>
         <ul>
             <li><a href="/admin/startseite">Startseite bearbeiten</a></li>
-            <!-- Weitere Links folgen z. B. für News, Team, Downloads -->
+            <li><a href="/admin/news">News verwalten</a></li>
+            <!-- Weitere Links folgen z. B. für Team, Downloads -->
         </ul>
     </section>
 `

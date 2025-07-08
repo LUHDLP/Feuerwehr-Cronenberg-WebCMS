@@ -1,14 +1,19 @@
 package de.feuerwehr.cronenberg.webcms.controller;
 
+import de.feuerwehr.cronenberg.webcms.model.News;
 import de.feuerwehr.cronenberg.webcms.model.StartseitenContent;
 import de.feuerwehr.cronenberg.webcms.service.FileUploadService;
+import de.feuerwehr.cronenberg.webcms.service.NewsService;
 import de.feuerwehr.cronenberg.webcms.service.StartseitenContentService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/admin")
@@ -69,4 +74,83 @@ public class AdminController {
             return "admin/startseite";
         }
     }
+
+    @Controller
+    @RequestMapping("/admin/news")
+    public class AdminNewsController {
+
+        private final NewsService newsService;
+        private final FileUploadService fileUploadService;
+
+        public AdminNewsController(NewsService newsService, FileUploadService fileUploadService) {
+            this.newsService = newsService;
+            this.fileUploadService = fileUploadService;
+        }
+
+        @GetMapping
+        public String listNews(Model model, @RequestParam(required = false) boolean success) {
+            model.addAttribute("newsList", newsService.getAllNews());
+            model.addAttribute("success", success);
+            return "admin/news_list";
+        }
+
+        @GetMapping("/new")
+        public String newNews(Model model) {
+            model.addAttribute("news", new News());
+            return "admin/news_form";
+        }
+
+        @GetMapping("/edit/{id}")
+        public String editNews(@PathVariable Long id, Model model) {
+            News news = newsService.getNewsById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+            model.addAttribute("news", news);
+            return "admin/news_form";
+        }
+
+        @PostMapping("/save")
+        public String saveNews(
+                @ModelAttribute News news,
+                @RequestParam(value = "image", required = false) MultipartFile image,
+                @RequestParam("datumVonDate") String datumVonDate,
+                @RequestParam(value = "datumVonTime", required = false) String datumVonTime,
+                @RequestParam(value = "datumBisDate", required = false) String datumBisDate,
+                @RequestParam(value = "datumBisTime", required = false) String datumBisTime
+        ) throws IOException {
+            // Datum von (Pflicht)
+            if (datumVonDate != null && !datumVonDate.isBlank()) {
+                String datetimeStr = datumVonDate + (datumVonTime != null && !datumVonTime.isBlank() ? "T" + datumVonTime : "T00:00");
+                news.setDatum(LocalDateTime.parse(datetimeStr));
+            }
+
+            // Datum bis (optional)
+            if (datumBisDate != null && !datumBisDate.isBlank()) {
+                String datetimeStr = datumBisDate + (datumBisTime != null && !datumBisTime.isBlank() ? "T" + datumBisTime : "T00:00");
+                news.setDatumBis(LocalDateTime.parse(datetimeStr));
+            } else {
+                news.setDatumBis(null);
+            }
+
+            if (image != null && !image.isEmpty()) {
+                String path = fileUploadService.save(image);
+                news.setBildPfad(path);
+            }
+
+            newsService.saveNews(news);
+            return "redirect:/admin/news?success=true";
+        }
+
+
+        @PostMapping("/delete/{id}")
+        public String deleteNews(@PathVariable Long id) {
+            newsService.deleteNews(id);
+            return "redirect:/admin/news?success=true";
+        }
+
+        @PostMapping("/toggleVisibility/{id}")
+        public String toggleVisibility(@PathVariable Long id) {
+            newsService.toggleVisibility(id);
+            return "redirect:/admin/news?success=true";
+        }
+    }
+
 }

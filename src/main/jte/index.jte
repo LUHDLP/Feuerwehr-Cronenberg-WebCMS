@@ -1,4 +1,9 @@
+@import de.feuerwehr.cronenberg.webcms.model.News
+@import java.util.List
+@import java.time.format.DateTimeFormatter
+
 @param de.feuerwehr.cronenberg.webcms.model.StartseitenContent content
+@param List<News> newsList
 
 @template.layout.layout(
 title = "Startseite | Feuerwehr Cronenberg",
@@ -14,7 +19,7 @@ content = @`
                             <div data-rsts-name="Mannschaftsfoto neu">
                                 <div class="home-slide ce_rsce_aurelium_home_slide">
                                     <div class="image-wrap">
-                                        <img src="${content.image1}" alt="Mannschaftsfoto" width="816" height="577">
+                                        <img src="${content.getImage1()}" alt="Mannschaftsfoto" width="816" height="577">
                                     </div>
                                     <div class="text-wrap">
                                         <section></section>
@@ -26,12 +31,12 @@ content = @`
                             <div data-rsts-name="Willkommen">
                                 <div class="home-slide ce_rsce_aurelium_home_slide">
                                     <div class="image-wrap">
-                                        <img src="${content.image2}" alt="Willkommen" width="816" height="577">
+                                        <img src="${content.getImage2()}" alt="Willkommen" width="816" height="577">
                                     </div>
                                     <div class="text-wrap">
                                         <section>
                                             <h1>Willkommen</h1>
-                                            <p>${content.willkommenstext}</p>
+                                            <p>${content.getWillkommenstext()}</p>
                                         </section>
                                     </div>
                                 </div>
@@ -62,15 +67,19 @@ content = @`
             <div class="mod_newslist teaser-boxes-news block">
                 <h1>News &amp; Aktuelles</h1>
 
-                <!-- Deine statischen News-Boxen bleiben erstmal wie gehabt -->
-                <!-- ... -->
-
+                @for (News news : newsList)
+                    <a href="/news-detail/${news.getId()}" class="box">
+                        <img src="${news.getBildPfad()}" width="283" height="400" alt="">
+                        <i>${news.getDatum().format(DateTimeFormatter.ofPattern("dd. MMMM yyyy"))}</i>
+                        <b><span>${news.getTitel()}</span></b>
+                    </a>
+                @endfor
             </div>
 
             <div class="ce_text teaser-text last block">
                 <h2>Herzlich Willkommen</h2>
                 <p>
-                    ${content.willkommenstext}
+                    ${content.getWillkommenstext()}
                 </p>
             </div>
 
