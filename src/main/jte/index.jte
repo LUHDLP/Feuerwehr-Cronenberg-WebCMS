@@ -12,7 +12,12 @@
 title = "Startseite | Feuerwehr Cronenberg",
 banner = null,
 content = @`
-    <section class="hero-slider">
+
+        @if(content.image1 != null && !content.image1.isEmpty())
+            <div class="hero-background" style="background-image: url('${content.image1}');"></div>
+        @endif
+
+        <section class="hero-slider">
         <div class="rsts-main rsts-direction-x rsts-type-slide rsts-skin-default rsts-no-touch">
             <div class="rsts-view">
                 <div class="rsts-crop">
@@ -41,8 +46,9 @@ content = @`
                         @endfor
                     </div>
 
-                    <a href="#" class="rsts-prev"><span class="rsts-prev-label">Zurück</span></a>
-                    <a href="#" class="rsts-next"><span class="rsts-next-label">Weiter</span></a>
+                    <div class="rsts-prev">←</div>
+                    <div class="rsts-next">→</div>
+
                 </div>
             </div>
 
