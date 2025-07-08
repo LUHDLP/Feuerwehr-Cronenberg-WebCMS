@@ -1,496 +1,597 @@
 
-    /* =======================
-       Feuerwehr Designsystem
-       Inspiriert von joseph-san.com
-       Farben: Feuerwehr-Rot, Dunkelrot, Gelb, Weiß, Grau
-       ======================= */
-    /* Farbvariablen */
-    :root {
-      --feuer-rot: #b60000;
-      --feuer-dunkelrot: #5a0000;
-      --feuer-gelb: #f8e36f;
-      --feuer-weiß: #ffffff;
-      --feuer-grau: #1e1e1e;
-      --feuer-hellgrau: #2a2a2a;
-      --feuer-akzent: #ff6b6b;
-    }
+/* =======================
+   Feuerwehr Designsystem
+   Inspiriert von joseph-san.com
+   Farben: Feuerwehr-Rot, Dunkelrot, Gelb, Weiß, Grau
+   ======================= */
 
-    /* Reset und Grundstruktur */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+/* Reset und Grundstruktur */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    html {
-      font-size: 16px;
-      scroll-behavior: smooth;
-    }
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #121212;
-      background-image: radial-gradient(circle at top left, rgba(255,255,255,0.03), transparent 30%),
-                        radial-gradient(circle at bottom right, rgba(255,255,255,0.02), transparent 30%);
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-attachment: fixed;
-      color: #fff;
-      line-height: 1.6;
-    }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #1a1a1a;
+  color: #fff;
+  line-height: 1.6;
+}
 
+/* Farbvariablen */
+:root {
+  --feuer-rot: #c40000;
+  --feuer-dunkelrot: #800000;
+  --feuer-gelb: #f3d547;
+  --feuer-weiß: #ffffff;
+  --feuer-grau: #2c2c2c;
+  --feuer-hellgrau: #444;
+  --feuer-akzent: #ff4c4c;
+}
 
-    /* Typografie */
-    h1, h2, h3 {
-      font-weight: 700;
-      color: var(--feuer-gelb);
-      margin-bottom: 0.5em;
-    }
+/* Typografie */
+h1, h2, h3 {
+  font-weight: 700;
+  color: var(--feuer-gelb);
+  margin-bottom: 0.5em;
+}
 
-    p {
-      color: var(--feuer-weiß);
-      margin-bottom: 1em;
-    }
+p {
+  color: var(--feuer-weiß);
+  margin-bottom: 1em;
+}
 
-    /* Buttons */
-    .btn {
-      background-color: var(--feuer-rot);
-      color: var(--feuer-weiß);
-      border: none;
-      padding: 0.7em 1.4em;
-      font-size: 1em;
-      border-radius: 0.3em;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .btn:hover {
-      background-color: var(--feuer-dunkelrot);
-    }
+/* Buttons */
+.btn {
+  background-color: var(--feuer-rot);
+  color: var(--feuer-weiß);
+  border: none;
+  padding: 0.7em 1.4em;
+  font-size: 1em;
+  border-radius: 0.3em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.btn:hover {
+  background-color: var(--feuer-dunkelrot);
+}
 
-    /* Layoutbereiche */
-    section {
-      padding: 3em 2em;
-      background-color: var(--feuer-grau);
-      border-top: 2px solid var(--feuer-dunkelrot);
-      border-bottom: 2px solid var(--feuer-dunkelrot);
-      margin-bottom: 2em;
-      border-radius: 0.5em;
-      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
-    }
+/* Layoutbereiche */
+section {
+  padding: 4em 2em;
+  background-color: var(--feuer-grau);
+  margin-bottom: 2em;
+  border-radius: 1em;
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
 
+/* Loginformulare */
+.form-style {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.form-style input[type="text"],
+.form-style input[type="password"],
+.form-style textarea {
+  padding: 0.6em;
+  font-size: 1em;
+  border-radius: 0.3em;
+  border: 1px solid var(--feuer-hellgrau);
+  background-color: #2a2a2a;
+  color: white;
+}
+.form-style label {
+  color: var(--feuer-gelb);
+  font-weight: bold;
+}
 
-    /* Loginformulare */
-    .form-style {
-      display: flex;
-      flex-direction: column;
-      gap: 1em;
-      max-width: 400px;
-      margin: 0 auto;
-    }
-    .form-style input[type="text"],
-    .form-style input[type="password"],
-    .form-style textarea {
-      padding: 0.6em;
-      font-size: 1em;
-      border-radius: 0.3em;
-      border: 1px solid var(--feuer-hellgrau);
-      background-color: #2a2a2a;
-      color: white;
-    }
-    .form-style label {
-      color: var(--feuer-gelb);
-      font-weight: bold;
-    }
+/* Hero-Slider */
+.hero-slider {
+  position: relative;
+  overflow: hidden;
+}
+.slider-box {
+  display: flex;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+.slider-slide {
+  min-width: 100%;
+  transition: transform 0.5s ease;
+  position: relative;
+}
+.slider-slide img {
+  width: 100%;
+  height: auto;
+  border-radius: 1em;
+}
+.slide-text {
+  position: absolute;
+  bottom: 2em;
+  left: 2em;
+  background-color: rgba(0,0,0,0.6);
+  padding: 1em;
+  border-radius: 0.5em;
+}
+.slide-text h1 {
+  color: var(--feuer-gelb);
+}
+.slide-text p {
+  color: var(--feuer-weiß);
+}
 
-    /* Hero-Slider */
-    .hero-slider {
-      position: relative;
-      overflow: hidden;
-    }
-    .slider-box {
-      display: flex;
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-    }
-    .slider-slide {
-      position: relative;
-      overflow: hidden;
-      border-radius: 1em;
-    }
+/* News Cards */
+.news-section {
+  background: var(--feuer-dunkelrot);
+}
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2em;
+}
+.news-card {
+  background-color: var(--feuer-grau);
+  border: 1px solid #444;
+  border-radius: 1em;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+.news-card:hover {
+  transform: translateY(-5px);
+}
+.news-image img {
+  width: 100%;
+  display: block;
+}
+.news-meta {
+  padding: 1em;
+}
+.news-date {
+  color: var(--feuer-gelb);
+  font-size: 0.9em;
+}
+.news-title {
+  font-size: 1.2em;
+  margin-top: 0.5em;
+  color: var(--feuer-weiß);
+}
+.news-button {
+  display: inline-block;
+  margin-top: 1em;
+  color: var(--feuer-rot);
+  text-decoration: underline;
+}
 
-    .slider-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: brightness(0.75);
-      transition: transform 0.4s ease;
-    }
-
-    .slider-slide:hover img {
-      transform: scale(1.03);
-    }
-
-    .slide-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.65);
-      padding: 2em;
-      border-left: 4px solid var(--feuer-rot);
-      border-radius: 0.5em;
-      backdrop-filter: blur(4px);
-      max-width: 600px;
-      text-align: center;
-    }
-
-    .slide-text h1 {
-      font-size: 1.6rem;
-      color: var(--feuer-gelb);
-      margin-bottom: 0.5em;
-      text-shadow: 0 0 4px var(--feuer-gelb);
-    }
-    .slide-text p {
-      font-size: 1rem;
-      line-height: 1.5;
-      color: var(--feuer-weiß);
-    }
-
-    /* News Cards */
-    .news-section {
-      background: var(--feuer-dunkelrot);
-    }
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2em;
-    }
-    .news-card {
-      background-color: var(--feuer-grau);
-      border: 1px solid #444;
-      border-radius: 1em;
-      overflow: hidden;
-      transition: transform 0.3s ease;
-    }
-    .news-card:hover {
-      transform: translateY(-5px);
-    }
-    .news-image img {
-      width: 100%;
-      display: block;
-    }
-    .news-meta {
-      padding: 1em;
-    }
-    .news-date {
-      color: var(--feuer-gelb);
-      font-size: 0.9em;
-    }
-    .news-title {
-      font-size: 1.2em;
-      margin-top: 0.5em;
-      color: var(--feuer-weiß);
-    }
-    .news-button {
-      display: inline-block;
-      margin-top: 1em;
-      color: var(--feuer-rot);
-      text-decoration: underline;
-    }
-
-    /* Adminbereich */
-    .admin-panel {
-      background-color: #222;
-      padding: 2em;
-      border-radius: 1em;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .success-message {
-      background: #2f6627;
-      color: white;
-      padding: 1em;
-      border-radius: 0.5em;
-      margin-top: 1em;
-    }
+/* Adminbereich */
+.admin-panel {
+  background-color: #222;
+  padding: 2em;
+  border-radius: 1em;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.success-message {
+  background: #2f6627;
+  color: white;
+  padding: 1em;
+  border-radius: 0.5em;
+  margin-top: 1em;
+}
 
 
-    /* Impressum & Login */
-    .Impressum {
-      background-color: var(--feuer-grau);
-      padding: 3em 2em;
-      border-left: 5px solid var(--feuer-rot);
-      border-radius: 1em;
-      max-width: 600px;
-      margin: 0 auto;
-    }
+/* Impressum & Login */
+.Impressum {
+  background-color: var(--feuer-grau);
+  padding: 3em 2em;
+  border-left: 5px solid var(--feuer-rot);
+  border-radius: 1em;
+  max-width: 600px;
+  margin: 0 auto;
+}
 
-    .heading, .section-heading {
-      font-size: 1.6rem;
-      margin-bottom: 1em;
-      color: var(--feuer-gelb);
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      text-shadow: 0 0 4px var(--feuer-gelb), 0 0 10px var(--feuer-rot);
-    }
+.heading, .section-heading {
+  font-size: 2rem;
+  margin-bottom: 1em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--feuer-gelb);
+  text-align: center;
+}
+
+/* Welcome Box */
+.welcome-box {
+  background-color: #1f1f1f;
+  padding: 2em;
+  border-left: 6px solid var(--feuer-rot);
+  border-radius: 1em;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.welcome-text p {
+  font-size: 1.1em;
+  color: var(--feuer-weiß);
+}
+
+/* Dropzone (Wiederverwendbar) */
+.dropzone {
+  border: 2px dashed var(--feuer-gelb);
+  padding: 2em;
+  text-align: center;
+  background-color: #2a2a2a;
+  border-radius: 0.5em;
+  transition: background-color 0.3s;
+  color: var(--feuer-weiß);
+}
+.dropzone.dragover {
+  background-color: #444;
+}
+
+/* News Admin Tabelle */
+.news-admin-table {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.news-row {
+  background-color: var(--feuer-hellgrau);
+  padding: 1em;
+  border-radius: 0.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.news-actions {
+  display: flex;
+  gap: 0.5em;
+}
+.btn.small {
+  padding: 0.3em 0.8em;
+  font-size: 0.85em;
+}
+.btn.danger {
+  background-color: #b00000;
+}
+
+/* Artikelübersicht */
+.layout_short {
+  background-color: var(--feuer-grau);
+  border-left: 4px solid var(--feuer-rot);
+  padding: 1.5em;
+  border-radius: 1em;
+  margin-bottom: 2em;
+}
+.layout_short h2 {
+  font-size: 1.3em;
+  margin-bottom: 0.5em;
+}
+.layout_short .teaser p {
+  margin-top: 1em;
+}
+.layout_short img {
+  max-width: 100%;
+  border-radius: 0.5em;
+  margin: 1em 0;
+}
+.layout_short .more a {
+  color: var(--feuer-gelb);
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+/* Banner */
+.banner {
+  background: linear-gradient(90deg, var(--feuer-rot), var(--feuer-dunkelrot));
+  padding: 2em;
+  color: var(--feuer-weiß);
+  text-align: center;
+  font-size: 1.5em;
+}
+
+/* Header / Navigation */
+header {
+  background-color: var(--feuer-grau);
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#logo img {
+  width: 120px;
+  height: auto;
+  margin-bottom: 1em;
+}
+#nav-main {
+  display: flex;
+  gap: 2em;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+#nav-main ul {
+  list-style: none;
+  display: flex;
+  gap: 1em;
+}
+#nav-main a {
+  color: var(--feuer-gelb);
+  text-decoration: none;
+  font-weight: bold;
+}
+#nav-main a:hover {
+  color: var(--feuer-akzent);
+}
+
+/* Mobile Nav */
+#nav-main-mobile {
+  display: none;
+  margin-top: 1em;
+}
+#nav-main-mobile select {
+  padding: 0.5em;
+  font-size: 1em;
+}
+
+/* Footer */
+footer {
+  background-color: var(--feuer-dunkelrot);
+  color: var(--feuer-weiß);
+  padding: 2em;
+  margin-top: 3em;
+}
+footer h2, footer h3 {
+  color: var(--feuer-gelb);
+}
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+footer ul li {
+  margin-bottom: 0.5em;
+}
+footer a {
+  color: var(--feuer-gelb);
+}
+footer form {
+  margin-top: 1em;
+}
+footer input[type="search"] {
+  padding: 0.5em;
+  border-radius: 0.3em;
+  border: none;
+}
+footer button {
+  background-color: var(--feuer-rot);
+  color: white;
+  padding: 0.5em 1em;
+  margin-left: 0.5em;
+  border: none;
+  border-radius: 0.3em;
+}
+
+/* Responsives Verhalten */
+@media (max-width: 768px) {
+  #nav-main {
+    display: none;
+  }
+  #nav-main-mobile {
+    display: block;
+  }
+  .hero-slider, .slider-box {
+    aspect-ratio: auto;
+  }
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 
-    /* Welcome Box */
-    .welcome-box {
-      background-color: #1f1f1f;
-      padding: 2em;
-      border-left: 6px solid var(--feuer-rot);
-      border-radius: 1em;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .welcome-text p {
-      font-size: 1.1em;
-      color: var(--feuer-weiß);
-    }
 
-    /* Dropzone (Wiederverwendbar) */
-    .dropzone {
-      border: 2px dashed var(--feuer-gelb);
-      padding: 2em;
-      text-align: center;
-      background-color: #2a2a2a;
-      border-radius: 0.5em;
-      transition: background-color 0.3s;
-      color: var(--feuer-weiß);
-    }
-    .dropzone.dragover {
-      background-color: #444;
-    }
+/* Fixierter Header */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: linear-gradient(to right, #111, #1a1a1a);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.8);
+  padding: 1em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    /* News Admin Tabelle */
-    .news-admin-table {
-      display: flex;
-      flex-direction: column;
-      gap: 1em;
-    }
-    .news-row {
-      background-color: var(--feuer-hellgrau);
-      padding: 1em;
-      border-radius: 0.5em;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .news-actions {
-      display: flex;
-      gap: 0.5em;
-    }
-    .btn.small {
-      padding: 0.3em 0.8em;
-      font-size: 0.85em;
-    }
-    .btn.danger {
-      background-color: #b00000;
-    }
+/* Logo & Schrift */
+#logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  margin-bottom: 0.6em;
+}
+#logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+#logo img {
+  width: 60px;
+  height: auto;
+}
+#logo::after {
+  content: "Freiwillige Feuerwehr Cronenberg";
+  font-size: 1.5em;
+  font-weight: 900;
+  color: #fffc;
+  text-shadow: 0 0 4px var(--feuer-gelb), 0 0 10px var(--feuer-rot);
+  letter-spacing: 1px;
+  margin-left: 0.5em;
+  transition: color 0.3s ease;
+}
+#logo:hover::after {
+  color: var(--feuer-gelb);
+}
 
-    /* Artikelübersicht */
-    .layout_short {
-      background-color: var(--feuer-grau);
-      border-left: 4px solid var(--feuer-rot);
-      padding: 1.5em;
-      border-radius: 1em;
-      margin-bottom: 2em;
-    }
-    .layout_short h2 {
-      font-size: 1.3em;
-      margin-bottom: 0.5em;
-    }
-    .layout_short .teaser p {
-      margin-top: 1em;
-    }
-    .layout_short img {
-      max-width: 100%;
-      border-radius: 0.5em;
-      margin: 1em 0;
-    }
-    .layout_short .more a {
-      color: var(--feuer-gelb);
-      text-decoration: underline;
-      font-weight: bold;
-    }
+/* Navigation */
+#nav-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em;
+}
+#nav-main ul {
+  list-style: none;
+  display: flex;
+  gap: 1em;
+}
+#nav-main a {
+  color: var(--feuer-gelb);
+  font-weight: bold;
+  font-size: 1em;
+  text-decoration: none;
+  padding: 0.4em 0.8em;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+#nav-main a:hover {
+  background-color: var(--feuer-rot);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px var(--feuer-akzent);
+}
 
-    /* Banner */
-    .banner {
-      background: linear-gradient(90deg, var(--feuer-rot), var(--feuer-dunkelrot));
-      padding: 2em;
-      color: var(--feuer-weiß);
-      text-align: center;
-      font-size: 1.5em;
-    }
 
-    /* Header / Navigation */
-    header {
-      background-color: var(--feuer-grau);
-      padding: 1em;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    #logo img {
-      width: 120px;
-      height: auto;
-      margin-bottom: 1em;
-    }
-    #nav-main {
-      display: flex;
-      gap: 2em;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 1em;
-    }
-    #nav-main ul {
-      list-style: none;
-      display: flex;
-      gap: 1em;
-    }
-    #nav-main a {
-      color: var(--feuer-gelb);
-      text-decoration: none;
-      font-weight: bold;
-    }
-    #nav-main a:hover {
-      color: var(--feuer-akzent);
-    }
 
-    /* Mobile Nav */
-    #nav-main-mobile {
-      display: none;
-      margin-top: 1em;
-    }
-    #nav-main-mobile select {
-      padding: 0.5em;
-      font-size: 1em;
-    }
+/* Neuer RockSolid-kompatibler Slider-Stil */
+.rsts-main {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 1em;
+  background-color: var(--feuer-grau);
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
 
-    /* Footer */
-    footer {
-      background-color: var(--feuer-dunkelrot);
-      color: var(--feuer-weiß);
-      padding: 2em;
-      margin-top: 3em;
-    }
-    footer h2, footer h3 {
-      color: var(--feuer-gelb);
-    }
-    footer ul {
-      list-style: none;
-      padding: 0;
-    }
-    footer ul li {
-      margin-bottom: 0.5em;
-    }
-    footer a {
-      color: var(--feuer-gelb);
-    }
-    footer form {
-      margin-top: 1em;
-    }
-    footer input[type="search"] {
-      padding: 0.5em;
-      border-radius: 0.3em;
-      border: none;
-    }
-    footer button {
-      background-color: var(--feuer-rot);
-      color: white;
-      padding: 0.5em 1em;
-      margin-left: 0.5em;
-      border: none;
-      border-radius: 0.3em;
-    }
+.rsts-view {
+  width: 100%;
+  height: 100%;
+}
 
-    /* Responsives Verhalten */
-    @media (max-width: 768px) {
-      #nav-main {
-        display: none;
-      }
-      #nav-main-mobile {
-        display: block;
-      }
-      .hero-slider, .slider-box {
-        aspect-ratio: auto;
-      }
-      .news-grid {
-        grid-template-columns: 1fr;
-      }
-    }
+.rsts-crop {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
 
-    /* Fixierter Header */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      background: linear-gradient(to right, #111, #1a1a1a);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.8);
-      padding: 1em 2em;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+.rsts-slides {
+  display: flex;
+  transition: transform 0.5s ease;
+}
 
-    /* Logo & Schrift */
-    #logo {
-      display: flex;
-      align-items: center;
-      gap: 0.6em;
-      margin-bottom: 0.6em;
-    }
-    #logo a {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-    }
-    #logo img {
-      width: 60px;
-      height: auto;
-    }
-    #logo::after {
-      content: "Freiwillige Feuerwehr Cronenberg";
-      font-size: 1.5em;
-      font-weight: 900;
-      color: #fffc;
-      text-shadow: 0 0 4px var(--feuer-gelb), 0 0 10px var(--feuer-rot);
-      letter-spacing: 1px;
-      margin-left: 0.5em;
-      transition: color 0.3s ease;
-    }
-    #logo:hover::after {
-      color: var(--feuer-gelb);
-    }
+.rsts-slide {
+  min-width: 100%;
+  transition: transform 0.5s ease;
+  position: relative;
+}
 
-    /* Navigation */
-    #nav-main {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1em;
-    }
-    #nav-main ul {
-      list-style: none;
-      display: flex;
-      gap: 1em;
-    }
-    #nav-main a {
-      color: var(--feuer-gelb);
-      font-weight: bold;
-      font-size: 1em;
-      text-decoration: none;
-      padding: 0.4em 0.8em;
-      border-radius: 6px;
-      transition: all 0.2s ease;
-    }
-    #nav-main a:hover {
-      background-color: var(--feuer-rot);
-      color: white;
-      transform: translateY(-2px);
-      box-shadow: 0 2px 6px var(--feuer-akzent);
-    }
+.rsts-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.75);
+}
+
+.rsts-slide:hover img {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
+.home-slide {
+  position: relative;
+}
+
+.image-wrap {
+  overflow: hidden;
+  border-radius: 0.5em;
+}
+
+.text-wrap {
+  position: absolute;
+  bottom: 10%;
+  left: 5%;
+  max-width: 600px;
+  background: rgba(0, 0, 0, 0.65);
+  padding: 2em;
+  border-left: 4px solid var(--feuer-rot);
+  border-radius: 0.5em;
+  backdrop-filter: blur(4px);
+}
+
+.text-wrap h1 {
+  font-size: 1.6rem;
+  color: var(--feuer-gelb);
+  margin-bottom: 0.5em;
+  text-shadow: 0 0 4px var(--feuer-gelb);
+}
+.text-wrap p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--feuer-weiß);
+}
+
+/* Navigation arrows */
+.rsts-prev, .rsts-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--feuer-weiß);
+  padding: 0.6em 1em;
+  z-index: 10;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+}
+.rsts-prev {
+  left: 1em;
+}
+.rsts-next {
+  right: 1em;
+}
+.rsts-prev:hover, .rsts-next:hover {
+  background-color: var(--feuer-rot);
+}
+
+/* Bullet-Navigation */
+.rsts-nav {
+  margin-top: 1em;
+  text-align: center;
+}
+.rsts-nav ul {
+  list-style: none;
+  display: inline-flex;
+  gap: 0.5em;
+  padding: 0;
+}
+.rsts-nav-item a {
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: var(--feuer-hellgrau);
+  border-radius: 50%;
+  text-indent: -9999px;
+  transition: background 0.3s ease;
+}
+.rsts-nav-item a.active,
+.rsts-nav-item a:hover {
+  background: var(--feuer-gelb);
+}
