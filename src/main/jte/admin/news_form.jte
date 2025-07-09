@@ -7,18 +7,18 @@ banner = null,
 content = @`
     <section class="admin-panel">
         <h1 class="heading">
-            @if(news.getId() == null) {
+            @if(news.getId() == null)
                 Neue News erstellen
-                } @else {
+                 @else
             News bearbeiten
-            }
+
             @endif
         </h1>
 
         <form method="post" action="/admin/news/save" enctype="multipart/form-data" class="form-style" id="newsForm">
-            @if(news.getId() != null) {
+            @if(news.getId() != null)
             <input type="hidden" name="id" value="${news.getId()}" />
-            }
+
             @endif
 
             <label for="titel">Titel:</label>
@@ -57,10 +57,10 @@ content = @`
                 <input type="file" name="image" id="fileElem" accept="image/*" />
             </div>
 
-            @if(news.getBildPfad() != null) {
+            @if(news.getBildPfad() != null)
             <p>Aktuelles Bild:</p>
             <p><img src="${news.getBildPfad()}" alt="Aktuelles Bild" style="max-width: 200px;" /></p>
-            }
+
             @endif
 
             <button type="submit" class="btn">Speichern</button>

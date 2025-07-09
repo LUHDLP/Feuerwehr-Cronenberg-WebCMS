@@ -13,17 +13,43 @@
 
 
 
+@font-face {
+  font-family: "DIN1451";
+  src: url("/fonts/DIN1451-Regular.woff2") format("woff2"),
+       url("/fonts/DIN1451-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "DIN1451";
+  src: url("/fonts/DIN1451-Bold.woff2") format("woff2"),
+       url("/fonts/DIN1451-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  font-family: "DIN1451", 'Segoe UI', sans-serif;
 }
 
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "DIN1451", 'Segoe UI', sans-serif;
   background-color: #1a1a1a;
   color: #fff;
   line-height: 1.6;
 }
+
+h1, h2, h3 {
+  font-family: "DIN1451", sans-serif;
+  font-weight: 700;
+  color: var(--feuer-gelb);
+  margin-bottom: 0.5em;
+}
+
+/* Alle weiteren Textelemente wie p, btn, etc. folgen dem neuen Basisfont */
+
 
 /* Farbvariablen */
 :root {
@@ -37,12 +63,7 @@ body {
   --feuer-bg-dark: #1a1a1a;
 }
 
-/* Typografie */
-h1, h2, h3 {
-  font-weight: 700;
-  color: var(--feuer-gelb);
-  margin-bottom: 0.5em;
-}
+
 
 p {
   color: var(--feuer-weiß);
@@ -341,15 +362,20 @@ header {
 .hero-background::after {
   content: "";
   position: absolute;
-  bottom: -1px;
+  bottom: -3em;
   left: 0;
   width: 100%;
   height: 6em;
-  background: linear-gradient(to top,
-      rgba(17, 17, 17, 1) 0%,
-      rgba(17, 17, 17, 0) 100%);
-  pointer-events: none;
-  z-index: 1;
+  background: linear-gradient(to bottom,
+      rgba(196, 0, 0, 0) 0%,
+      rgba(196, 0, 0, 0.4) 20%,
+      rgba(196, 0, 0, 0.75) 40%,
+      rgba(196, 0, 0, 1) 50%,
+      rgba(196, 0, 0, 0.75) 60%,
+      rgba(196, 0, 0, 0.4) 80%,
+      rgba(196, 0, 0, 0) 100%);
+    pointer-events: none;
+    z-index: 2;
 }
 
 
@@ -359,6 +385,7 @@ header {
   background-color: var(--feuer-bg-dark);
   position: relative;
   z-index: 1;
+
 }
 
 #wrapper::before {
@@ -797,4 +824,174 @@ p, a, li {
 .news-section,
 .welcome-box {
   margin-bottom: 4em; /* Mehr Abstand zwischen den Sektionen */
+}
+
+/* ===== Admin-Styling passend zum Feuerwehr-Design ===== */
+
+/* Allgemeine Eingabefelder */
+.admin-panel input[type="text"],
+.admin-panel input[type="url"],
+.admin-panel input[type="date"],
+.admin-panel input[type="time"],
+.admin-panel input[type="file"],
+.admin-panel textarea {
+  background-color: #2a2a2a;
+  color: var(--feuer-weiß);
+  border: 1px solid var(--feuer-hellgrau);
+  border-radius: 0.4em;
+  padding: 0.5em;
+  width: 100%;
+  max-width: 600px;
+  font-size: 1em;
+}
+
+/* Checkboxen */
+.admin-panel input[type="checkbox"] {
+  transform: scale(1.2);
+  accent-color: var(--feuer-rot);
+}
+
+/* Dropzone-Bereich */
+.dropzone p {
+  color: var(--feuer-gelb);
+  font-weight: bold;
+}
+
+/* Vorschau-Bilder */
+.dropzone img,
+#preview1,
+#preview2 {
+  border: 1px solid var(--feuer-hellgrau);
+  border-radius: 0.5em;
+  margin-top: 0.5em;
+}
+
+/* Tabellen für Slider & News */
+.admin-panel table.form-style {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+}
+.admin-panel table th,
+.admin-panel table td {
+  padding: 0.8em;
+  border-bottom: 1px solid #444;
+  color: var(--feuer-weiß);
+}
+.admin-panel table th {
+  background-color: var(--feuer-dunkelrot);
+  color: var(--feuer-gelb);
+  text-align: left;
+}
+
+/* News-Reihe in Adminbereich */
+.news-row {
+  background-color: #2a2a2a;
+  border-left: 4px solid var(--feuer-rot);
+  padding: 1em;
+  border-radius: 0.6em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.news-info strong {
+  color: var(--feuer-gelb);
+}
+
+/* Link-Styling im Admin */
+.admin-panel a.btn {
+  background-color: var(--feuer-rot);
+  color: white;
+  padding: 0.5em 1em;
+  border-radius: 0.3em;
+  display: inline-block;
+  text-decoration: none;
+}
+.admin-panel a.btn:hover {
+  background-color: var(--feuer-dunkelrot);
+}
+
+/* Danger Button */
+.btn.delete,
+.btn.danger {
+  background-color: #b00000;
+}
+.btn.delete:hover,
+.btn.danger:hover {
+  background-color: #800000;
+}
+
+/* Success-Message */
+.success-message {
+  background-color: #27632a;
+  border-left: 4px solid #4caf50;
+  padding: 1em;
+  margin-top: 1em;
+  border-radius: 0.5em;
+  color: #fff;
+}
+
+/* Labels */
+.admin-panel label {
+  font-weight: bold;
+  color: var(--feuer-gelb);
+  margin-top: 1em;
+  display: block;
+}
+
+.news-row {
+  background-color: var(--feuer-grau); /* statt weiß */
+  padding: 1.2em 1.5em;
+  border-radius: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease;
+}
+.news-row:hover {
+  transform: translateY(-3px);
+}
+
+.news-info strong {
+  color: var(--feuer-gelb);
+  font-size: 1.1em;
+}
+
+.news-info small {
+  color: #bbb;
+  font-size: 0.9em;
+  display: block;
+  margin-top: 0.3em;
+}
+
+.news-actions {
+  display: flex;
+  gap: 0.6em;
+  flex-wrap: wrap;
+}
+
+/* Einheitlicher Button-Stil für Verwaltung */
+.btn.small {
+  padding: 0.4em 1em;
+  font-size: 0.9em;
+  border-radius: 0.4em;
+  font-weight: bold;
+  background-color: var(--feuer-rot);
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+}
+.btn.small:hover {
+  background-color: var(--feuer-dunkelrot);
+  box-shadow: 0 0 8px var(--feuer-akzent);
+}
+
+.btn.danger {
+  background-color: #900;
+}
+.btn.danger:hover {
+  background-color: #b00;
 }

@@ -84,7 +84,7 @@ content = @`
     <section class="welcome-box">
         <h2 class="section-heading">Herzlich Willkommen</h2>
         <div class="welcome-text">
-            <p>${content.getWillkommenstext()}</p>
+            <p style="white-space: pre-wrap;">${content.getWillkommenstext()}</p>
         </div>
     </section>
 `

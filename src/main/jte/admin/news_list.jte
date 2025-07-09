@@ -11,9 +11,9 @@ content = @`
 
         <a href="/admin/news/new" class="btn">+ Neuer Artikel</a>
 
-        @if(success) {
+        @if(success)
             <p class="success-message">Änderungen wurden erfolgreich übernommen.</p>
-            }
+
         @endif
 
         <div class="news-admin-table">

@@ -25,17 +25,17 @@ content = @`
 
             <label for="imageFile">Bild:</label>
             <input type="file" name="imageFile" id="imageFile" />
-            @if(slide.getImageUrl() != null && !slide.getImageUrl().isEmpty()) {
+            @if(slide.getImageUrl() != null && !slide.getImageUrl().isEmpty())
                 <img src="${slide.getImageUrl()}" style="max-height: 120px; margin-top: 10px;" />
-                }
+
             @endif
 
             <label for="sichtbar">Sichtbar:</label>
-            @if(slide.isSichtbar()) {
+            @if(slide.isSichtbar())
                 <input type="checkbox" name="sichtbar" id="sichtbar" checked />
-                } @else {
+                 @else
                 <input type="checkbox" name="sichtbar" id="sichtbar" />
-                }
+
             @endif
 
             <button type="submit" class="btn">Speichern</button>
