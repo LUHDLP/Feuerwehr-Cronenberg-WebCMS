@@ -1,11 +1,5 @@
-/* =======================
-   Feuerwehr Designsystem
-   Inspiriert von joseph-san.com
-   Farben: Feuerwehr-Rot, Dunkelrot, Gelb, Weiß, Grau
-   ======================= */
 
-/* Reset und Grundstruktur */
-* {
+ {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -48,10 +42,7 @@ h1, h2, h3 {
   margin-bottom: 0.5em;
 }
 
-/* Alle weiteren Textelemente wie p, btn, etc. folgen dem neuen Basisfont */
 
-
-/* Farbvariablen */
 :root {
   --feuer-rot: #c40000;
   --feuer-dunkelrot: #800000;
@@ -891,7 +882,10 @@ p, a, li {
 }
 
 /* Checkboxen */
-.admin-panel input[type="checkbox"] {
+.admin-pa   ======================= */
+
+/* Reset und Grundstruktur */
+*nel input[type="checkbox"] {
   transform: scale(1.2);
   accent-color: var(--feuer-rot);
 }
@@ -1041,50 +1035,76 @@ p, a, li {
   background-color: #b00;
 }
 
-#cube {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transform: rotateY(0deg);
-  transition: transform 0.9s ease-in-out;
-  perspective: 1200px; /* Optional: Tiefeneffekt verstärken */
-}
-
-.cube-face {
+.rsts-slide {
+  backface-visibility: hidden;
   position: absolute;
   width: 100%;
-  height: 100%;
   top: 0;
   left: 0;
-  backface-visibility: hidden;
-
-  /* Optional: Hilft beim Rendern in Safari/Firefox */
-  transform-style: preserve-3d;
-  will-change: transform;
-  visibility: visible;
-  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
-
-/* Positionierung bis 4 Slides */
-.cube-face:nth-child(1) { transform: rotateY(0deg) translateZ(600px); }
-.cube-face:nth-child(2) { transform: rotateY(90deg) translateZ(600px); }
-.cube-face:nth-child(3) { transform: rotateY(180deg) translateZ(600px); }
-.cube-face:nth-child(4) { transform: rotateY(270deg) translateZ(600px); }
-
-img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  loading: eager;
-}
-
-.slide-inner {
-  width: 100%;
-  height: 100%;
+.rsts-slide.active {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  opacity: 1;
+  z-index: 2;
+}
+
+#cube.rotating .cube-left,
+#cube.rotating .cube-right {
+  opacity: 1;
+  transform: perspective(1000px) rotateY(var(--rotate));
+  z-index: 3;
+  transition: transform 0.6s ease-in-out;
+}
+
+.cube-left {
+  --rotate: 90deg;
+  transform-origin: left center;
+}
+
+.cube-right {
+  --rotate: -90deg;
+  transform-origin: right center;
+}
+
+/* Ein-/Ausblend-3D-Übergang */
+.cube-left-in {
+  transform: rotateY(90deg);
+  transform-origin: left center;
+  animation: cubeInFromRight 0.6s ease-in-out forwards;
+  z-index: 3;
+}
+.cube-right-in {
+  transform: rotateY(-90deg);
+  transform-origin: right center;
+  animation: cubeInFromLeft 0.6s ease-in-out forwards;
+  z-index: 3;
+}
+.cube-left-out {
+  transform-origin: right center;
+  animation: cubeOutToLeft 0.6s ease-in-out forwards;
+  z-index: 2;
+}
+.cube-right-out {
+  transform-origin: left center;
+  animation: cubeOutToRight 0.6s ease-in-out forwards;
+  z-index: 2;
+}
+
+@keyframes cubeInFromRight {
+  0% { transform: rotateY(90deg); opacity: 0; }
+  100% { transform: rotateY(0); opacity: 1; }
+}
+@keyframes cubeInFromLeft {
+  0% { transform: rotateY(-90deg); opacity: 0; }
+  100% { transform: rotateY(0); opacity: 1; }
+}
+@keyframes cubeOutToLeft {
+  0% { transform: rotateY(0); opacity: 1; }
+  100% { transform: rotateY(-90deg); opacity: 0; }
+}
+@keyframes cubeOutToRight {
+  0% { transform: rotateY(0); opacity: 1; }
+  100% { transform: rotateY(90deg); opacity: 0; }
 }

@@ -37,9 +37,9 @@ content = @`
                                                 <section>
                                                     <h1>${slide.getTitel()}</h1>
                                                     <p>${slide.getText()}</p>
-                                                    @if(slide.getLinkUrl() != null && !slide.getLinkUrl().isEmpty()) {
+                                                    @if(slide.getLinkUrl() != null && !slide.getLinkUrl().isEmpty())
                                                         <a href="${slide.getLinkUrl()}" class="btn">${slide.getLinkText()}</a>
-                                                        }
+
                                                     @endif
                                                 </section>
                                             </div>
@@ -97,30 +97,55 @@ content = @`
     @raw
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            let currentSlide = 0;
-            const cube = document.getElementById("cube");
-            const totalSlides = cube.querySelectorAll('.cube-face').length;
+      let currentSlide = 0;
+      const cube = document.getElementById("cube");
+      const slides = cube.querySelectorAll('.rsts-slide');
+      const totalSlides = slides.length;
 
-            function rotateCube(index) {
-                const angle = -90 * index;
-                cube.style.transform = 'rotateY(' + angle + 'deg)';
-            }
-
-            const nextBtn = document.querySelector('.rsts-next');
-            const prevBtn = document.querySelector('.rsts-prev');
-
-            if (nextBtn && prevBtn) {
-                nextBtn.addEventListener('click', () => {
-                    currentSlide = (currentSlide + 1) % totalSlides;
-                    rotateCube(currentSlide);
-                });
-
-                prevBtn.addEventListener('click', () => {
-                    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                    rotateCube(currentSlide);
-                });
-            }
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.remove('active', 'cube-left', 'cube-right');
+          if (i === index) {
+            slide.classList.add('active');
+          }
         });
+      }
+
+      function rotateTo(index, direction) {
+  const current = slides[currentSlide];
+  const next = slides[index];
+
+  const outClass = direction === 'next' ? 'cube-left-out' : 'cube-right-out';
+  const inClass = direction === 'next' ? 'cube-right-in' : 'cube-left-in';
+
+  current.classList.add(outClass);
+  next.classList.add(inClass);
+
+  cube.classList.add('rotating');
+
+  setTimeout(() => {
+    current.classList.remove('active', outClass);
+    next.classList.remove(inClass);
+    next.classList.add('active');
+    cube.classList.remove('rotating');
+    currentSlide = index;
+  }, 600);
+}
+
+
+      document.querySelector('.rsts-next').addEventListener('click', () => {
+        const next = (currentSlide + 1) % totalSlides;
+        rotateTo(next, 'next');
+      });
+
+      document.querySelector('.rsts-prev').addEventListener('click', () => {
+        const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+        rotateTo(prev, 'prev');
+      });
+
+      showSlide(currentSlide);
+    });
+
     </script>
     @endraw
 `
