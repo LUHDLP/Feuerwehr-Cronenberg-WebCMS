@@ -1,4 +1,3 @@
-
  {
   margin: 0;
   padding: 0;
@@ -114,7 +113,7 @@ section {
   overflow: hidden;
   width: 85%;
   margin: 0 auto;
-  margin-top: calc(30vh + 2em);
+  margin-top: calc(20vh + 2em);
 }
 
 
@@ -244,19 +243,36 @@ section {
   color: var(--feuer-weiß);
 }
 
-/* Dropzone (Wiederverwendbar) */
 .dropzone {
   border: 2px dashed var(--feuer-gelb);
   padding: 2em;
   text-align: center;
   background-color: #2a2a2a;
   border-radius: 0.5em;
-  transition: background-color 0.3s;
   color: var(--feuer-weiß);
+  position: relative;
+  transition: background-color 0.3s ease;
 }
+
 .dropzone.dragover {
   background-color: #444;
 }
+
+.dropzone p {
+  color: var(--feuer-gelb);
+  font-weight: bold;
+  margin: 0;
+}
+
+.preview-image {
+  margin-top: 1em;
+  max-width: 100%;
+  border-radius: 0.5em;
+  border: 1px solid var(--feuer-hellgrau);
+  display: block;
+}
+
+
 
 /* News Admin Tabelle */
 .news-admin-table {
@@ -910,20 +926,6 @@ p, a, li {
   accent-color: var(--feuer-rot);
 }
 
-/* Dropzone-Bereich */
-.dropzone p {
-  color: var(--feuer-gelb);
-  font-weight: bold;
-}
-
-/* Vorschau-Bilder */
-.dropzone img,
-#preview1,
-#preview2 {
-  border: 1px solid var(--feuer-hellgrau);
-  border-radius: 0.5em;
-  margin-top: 0.5em;
-}
 
 /* Tabellen für Slider & News */
 .admin-panel table.form-style {

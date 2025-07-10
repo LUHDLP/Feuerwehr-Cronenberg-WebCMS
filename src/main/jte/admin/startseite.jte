@@ -16,13 +16,14 @@ content = @`
             <div class="dropzone" id="dropzone1">
                 <p>Bild 1 hierher ziehen oder klicken</p>
                 <input type="file" name="image1" id="image1" accept="image/*" hidden />
-                @if(content.image1 != null && !content.image1.isEmpty())
-                    <img id="preview1" src="${content.image1}" alt="Bild 1 Vorschau" style="max-width: 200px;" />
-                     @else
-                    <img id="preview1" style="max-width: 200px; display: none;" />
 
+                @if(content.image1 != null && !content.image1.isEmpty())
+                    <img id="preview1" src="${content.image1}" alt="Bild 1 Vorschau" class="preview-image" />
+                @else
+                    <img id="preview1" alt="Bild 1 Vorschau" class="preview-image" style="display: none;" />
                 @endif
             </div>
+
 
             <label>Bild 2:</label>
             <div class="dropzone" id="dropzone2">
@@ -50,49 +51,76 @@ content = @`
             const input = document.getElementById(inputId);
             const preview = document.getElementById(previewId);
 
+            // Öffne Datei-Dialog bei Klick
             dropzone.addEventListener("click", () => input.click());
 
-            dropzone.addEventListener("dragover", (e) => {
-                e.preventDefault();
-                dropzone.classList.add("dragover");
+            // Drag & Drop Highlight
+            ["dragenter", "dragover"].forEach(eventName => {
+                dropzone.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropzone.classList.add("dragover");
+                });
             });
 
-            dropzone.addEventListener("dragleave", () => {
-                dropzone.classList.remove("dragover");
+            ["dragleave", "drop"].forEach(eventName => {
+                dropzone.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropzone.classList.remove("dragover");
+                });
             });
 
+            // Datei per Drag & Drop ablegen
             dropzone.addEventListener("drop", (e) => {
-                e.preventDefault();
-                dropzone.classList.remove("dragover");
-
                 const file = e.dataTransfer.files[0];
                 if (file && file.type.startsWith("image/")) {
+                    showPreview(file);
                     input.files = e.dataTransfer.files;
-
-                    const reader = new FileReader();
-                    reader.onload = (ev) => {
-                        preview.src = ev.target.result;
-                        preview.style.display = "block";
-                    };
-                    reader.readAsDataURL(file);
                 }
             });
 
+            // Vorschau bei Dateiauswahl
             input.addEventListener("change", () => {
                 const file = input.files[0];
                 if (file && file.type.startsWith("image/")) {
-                    const reader = new FileReader();
-                    reader.onload = (ev) => {
-                        preview.src = ev.target.result;
-                        preview.style.display = "block";
-                    };
-                    reader.readAsDataURL(file);
+                    showPreview(file);
                 }
             });
+
+            // STRG+V (Paste)
+            document.addEventListener("paste", (e) => {
+                if (!dropzone.contains(document.activeElement)) return;
+
+                const items = e.clipboardData.items;
+                for (let item of items) {
+                    if (item.kind === "file" && item.type.startsWith("image/")) {
+                        const file = item.getAsFile();
+                        showPreview(file);
+                        const dt = new DataTransfer();
+                        dt.items.add(file);
+                        input.files = dt.files;
+                        dropzone.classList.add("pasted");
+                        setTimeout(() => dropzone.classList.remove("pasted"), 1000);
+                    }
+                }
+            });
+
+            function showPreview(file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    preview.src = e.target.result;
+                    preview.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
         }
 
         setupDropzone("dropzone1", "image1", "preview1");
         setupDropzone("dropzone2", "image2", "preview2");
+    </script>
+
+
     </script>
 
     <style>

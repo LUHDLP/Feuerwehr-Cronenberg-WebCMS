@@ -75,12 +75,14 @@ content = @`
     </section>
 
     <script>
-        <script>
+
     const docDropArea = document.getElementById("doc-drop-area");
     const docFileInput = document.getElementById("docFileElem");
 
+    // Klick öffnet Dateiauswahl
     docDropArea.addEventListener("click", () => docFileInput.click());
 
+    // Drag-over-Highlight
     ["dragenter", "dragover"].forEach(eventName => {
         docDropArea.addEventListener(eventName, (e) => {
             e.preventDefault();
@@ -89,6 +91,7 @@ content = @`
         }, false);
     });
 
+    // Entferne Highlight bei Dragleave/Drop
     ["dragleave", "drop"].forEach(eventName => {
         docDropArea.addEventListener(eventName, (e) => {
             e.preventDefault();
@@ -97,14 +100,36 @@ content = @`
         }, false);
     });
 
+    // Datei ablegen per Drag & Drop
     docDropArea.addEventListener("drop", (e) => {
         const files = e.dataTransfer.files;
         if (files.length > 0) {
-            docFileInput.files = files;
+            const file = files[0];
+            if (file.type === "application/pdf") {
+                docFileInput.files = e.dataTransfer.files;
+            } else {
+                alert("Bitte nur PDF-Dateien hochladen.");
+            }
         }
     });
-    </script>
 
+    // ✅ Unterstützung für STRG+V von PDFs (optional)
+    document.addEventListener("paste", (e) => {
+        if (!docDropArea.contains(document.activeElement)) return;
+
+        const items = e.clipboardData.items;
+        for (let item of items) {
+            if (item.kind === "file" && item.type === "application/pdf") {
+                const file = item.getAsFile();
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                docFileInput.files = dataTransfer.files;
+                // Optional: Zeige Bestätigung
+                docDropArea.classList.add("pasted");
+                setTimeout(() => docDropArea.classList.remove("pasted"), 1000);
+            }
+        }
+    });
     </script>
 
     <style>
