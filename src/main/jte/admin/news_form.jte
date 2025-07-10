@@ -35,6 +35,13 @@ content = @`
                 ${news.getFullText() != null ? news.getFullText() : ""}
         </textarea>
 
+            <label>Dokument (optional):</label>
+            <div id="doc-drop-area" class="drop-area">
+                <p>PDF hierher ziehen oder klicken zum Hochladen</p>
+                <input type="file" name="dokument" id="docFileElem" accept="application/pdf" />
+            </div>
+
+
             <label>Datum (von):</label>
             <div class="datetime-group">
                 <input type="date" name="datumVonDate" required
@@ -68,33 +75,36 @@ content = @`
     </section>
 
     <script>
-        const dropArea = document.getElementById("drop-area");
-        const fileInput = document.getElementById("fileElem");
+        <script>
+    const docDropArea = document.getElementById("doc-drop-area");
+    const docFileInput = document.getElementById("docFileElem");
 
-        dropArea.addEventListener("click", () => fileInput.click());
+    docDropArea.addEventListener("click", () => docFileInput.click());
 
-        ["dragenter", "dragover"].forEach(eventName => {
-            dropArea.addEventListener(eventName, (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                dropArea.classList.add("highlight");
-            }, false);
-        });
+    ["dragenter", "dragover"].forEach(eventName => {
+        docDropArea.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            docDropArea.classList.add("highlight");
+        }, false);
+    });
 
-        ["dragleave", "drop"].forEach(eventName => {
-            dropArea.addEventListener(eventName, (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                dropArea.classList.remove("highlight");
-            }, false);
-        });
+    ["dragleave", "drop"].forEach(eventName => {
+        docDropArea.addEventListener(eventName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            docDropArea.classList.remove("highlight");
+        }, false);
+    });
 
-        dropArea.addEventListener("drop", (e) => {
-            const files = e.dataTransfer.files;
-            if (files.length > 0) {
-                fileInput.files = files;
-            }
-        });
+    docDropArea.addEventListener("drop", (e) => {
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            docFileInput.files = files;
+        }
+    });
+    </script>
+
     </script>
 
     <style>

@@ -15,7 +15,7 @@ content = @`
 
     @if(content.image1 != null && !content.image1.isEmpty())
         <div class="hero-background" style="background-image: url('${content.image1}');">
-            <div class="hero-text">Willkommen</div>
+            <div class="hero-text">Willkommen!</div>
         </div>
     @endif
 

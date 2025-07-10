@@ -111,18 +111,20 @@ public class AdminController {
         public String saveNews(
                 @ModelAttribute News news,
                 @RequestParam(value = "image", required = false) MultipartFile image,
+                @RequestParam(value = "dokument", required = false) MultipartFile dokument,
                 @RequestParam("datumVonDate") String datumVonDate,
                 @RequestParam(value = "datumVonTime", required = false) String datumVonTime,
                 @RequestParam(value = "datumBisDate", required = false) String datumBisDate,
                 @RequestParam(value = "datumBisTime", required = false) String datumBisTime
         ) throws IOException {
-            // Datum von (Pflicht)
+
+            // Datum von (Pflichtfeld)
             if (datumVonDate != null && !datumVonDate.isBlank()) {
                 String datetimeStr = datumVonDate + (datumVonTime != null && !datumVonTime.isBlank() ? "T" + datumVonTime : "T00:00");
                 news.setDatum(LocalDateTime.parse(datetimeStr));
             }
 
-            // Datum bis (optional)
+            // Datum bis (Optional)
             if (datumBisDate != null && !datumBisDate.isBlank()) {
                 String datetimeStr = datumBisDate + (datumBisTime != null && !datumBisTime.isBlank() ? "T" + datumBisTime : "T00:00");
                 news.setDatumBis(LocalDateTime.parse(datetimeStr));
@@ -130,14 +132,24 @@ public class AdminController {
                 news.setDatumBis(null);
             }
 
+            // Bild speichern oder Standardbild setzen
             if (image != null && !image.isEmpty()) {
                 String path = fileUploadService.save(image);
                 news.setBildPfad(path);
+            } else if (news.getBildPfad() == null || news.getBildPfad().isBlank()) {
+                news.setBildPfad("/images/ffc_logo_trans_150.png"); // <- Standardbild
+            }
+
+            // Dokument speichern
+            if (dokument != null && !dokument.isEmpty()) {
+                String path = fileUploadService.save(dokument);
+                news.setDokumentPfad(path);
             }
 
             newsService.saveNews(news);
             return "redirect:/admin/news?success=true";
         }
+
 
 
         @PostMapping("/delete/{id}")

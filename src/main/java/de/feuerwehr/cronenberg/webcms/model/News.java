@@ -15,6 +15,15 @@ public class News {
     private String fullText;
     private String bildPfad;
     private LocalDateTime datum;
+    private String dokumentPfad;
+
+    public String getDokumentPfad() {
+        return dokumentPfad;
+    }
+
+    public void setDokumentPfad(String dokumentPfad) {
+        this.dokumentPfad = dokumentPfad;
+    }
 
     // Getter und Setter
     public Long getId() {
