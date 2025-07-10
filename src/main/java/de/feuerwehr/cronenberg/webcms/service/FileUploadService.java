@@ -12,7 +12,7 @@ import java.util.UUID;
 public class FileUploadService {
 
     // Basisverzeichnis für Uploads (relativ zum Projekt-Root)
-    private static final Path BASE_UPLOAD_DIR = Paths.get("src/main/resources/static/uploads").toAbsolutePath();
+    private static final Path BASE_UPLOAD_DIR = Paths.get("uploads").toAbsolutePath(); // OHNE 'src/main/resources'
 
     public String save(MultipartFile file) throws IOException {
         if (file == null || file.isEmpty()) {
