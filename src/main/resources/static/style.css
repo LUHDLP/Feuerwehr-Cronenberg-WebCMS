@@ -349,14 +349,59 @@ header {
 .hero-background {
   position: relative;
   height: 60vh;
+  max-width: 90%;
+  margin: -4em auto -5em auto;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   z-index: 0;
-  filter: brightness(0.6);
-  margin-top: -4em;
-  margin-bottom: -5em;
+  border-radius: 1em;
+
+  /* Kein filter mehr hier → damit Text nicht betroffen ist */
+  /* Filter kommt in ::before */
+
+  box-shadow:
+    0 0 60px rgba(0, 0, 0, 0.75),
+    0 0 120px rgba(0, 0, 0, 0.6),
+    0 0 200px rgba(0, 0, 0, 0.5),
+    0 0 280px rgba(0, 0, 0, 0.4);
+}
+
+/* ✅ Filter für Bildabdunklung & Grauschleier */
+.hero-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 1em;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: brightness(0.5) grayscale(0.4);
+}
+
+/* ✅ Text sichtbar über dem Filter */
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-family: "DIN1451", 'Segoe UI', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--feuer-gelb);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  padding: 0.6em 1.2em;
+  border-radius: 0.5em;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.6), 0 0 2px rgba(255, 255, 255, 0.1);
+  z-index: 2;
 }
 
 .hero-background::after {
@@ -994,4 +1039,52 @@ p, a, li {
 }
 .btn.danger:hover {
   background-color: #b00;
+}
+
+#cube {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  transition: transform 0.9s ease-in-out;
+  perspective: 1200px; /* Optional: Tiefeneffekt verstärken */
+}
+
+.cube-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+
+  /* Optional: Hilft beim Rendern in Safari/Firefox */
+  transform-style: preserve-3d;
+  will-change: transform;
+  visibility: visible;
+  z-index: 1;
+}
+
+/* Positionierung bis 4 Slides */
+.cube-face:nth-child(1) { transform: rotateY(0deg) translateZ(600px); }
+.cube-face:nth-child(2) { transform: rotateY(90deg) translateZ(600px); }
+.cube-face:nth-child(3) { transform: rotateY(180deg) translateZ(600px); }
+.cube-face:nth-child(4) { transform: rotateY(270deg) translateZ(600px); }
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  loading: eager;
+}
+
+.slide-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

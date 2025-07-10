@@ -13,36 +13,41 @@ title = "Startseite | Feuerwehr Cronenberg",
 banner = null,
 content = @`
 
-        @if(content.image1 != null && !content.image1.isEmpty())
-            <div class="hero-background" style="background-image: url('${content.image1}');"></div>
-        @endif
+    @if(content.image1 != null && !content.image1.isEmpty())
+        <div class="hero-background" style="background-image: url('${content.image1}');">
+            <div class="hero-text">Willkommen</div>
+        </div>
+    @endif
 
-        <section class="hero-slider">
+
+    <section class="hero-slider">
         <div class="rsts-main rsts-direction-x rsts-type-slide rsts-skin-default rsts-no-touch">
             <div class="rsts-view">
                 <div class="rsts-crop">
-                    <div class="rsts-slides">
+                    <div class="rsts-slides cube-wrapper" id="cube">
                         @for(HomeSlide slide : slides)
-                            <div class="rsts-slide rsts-slide-default">
-                                <div data-rsts-name="${slide.getTitel()}">
-                                    <div class="home-slide ce_rsce_aurelium_home_slide">
-                                        <div class="image-wrap">
-                                            <img src="${slide.getImageUrl()}" alt="${slide.getTitel()}" />
-
-                                        </div>
-                                        <div class="text-wrap">
-                                            <section>
-                                                <h1>${slide.getTitel()}</h1>
-                                                <p>${slide.getText()}</p>
-                                                @if(slide.getLinkUrl() != null && !slide.getLinkUrl().isEmpty()) {
-                                                    <a href="${slide.getLinkUrl()}" class="btn">${slide.getLinkText()}</a>
-                                                    }
-                                                @endif
-                                            </section>
+                            <div class="rsts-slide rsts-slide-default cube-face">
+                                <div class="slide-inner">
+                                    <div data-rsts-name="${slide.getTitel()}">
+                                        <div class="home-slide ce_rsce_aurelium_home_slide">
+                                            <div class="image-wrap">
+                                                <img src="${slide.getImageUrl()}" alt="${slide.getTitel()}" loading="eager" />
+                                            </div>
+                                            <div class="text-wrap">
+                                                <section>
+                                                    <h1>${slide.getTitel()}</h1>
+                                                    <p>${slide.getText()}</p>
+                                                    @if(slide.getLinkUrl() != null && !slide.getLinkUrl().isEmpty()) {
+                                                        <a href="${slide.getLinkUrl()}" class="btn">${slide.getLinkText()}</a>
+                                                        }
+                                                    @endif
+                                                </section>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         @endfor
                     </div>
 
@@ -87,5 +92,36 @@ content = @`
             <p style="white-space: pre-wrap;">${content.getWillkommenstext()}</p>
         </div>
     </section>
+
+
+    @raw
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let currentSlide = 0;
+            const cube = document.getElementById("cube");
+            const totalSlides = cube.querySelectorAll('.cube-face').length;
+
+            function rotateCube(index) {
+                const angle = -90 * index;
+                cube.style.transform = 'rotateY(' + angle + 'deg)';
+            }
+
+            const nextBtn = document.querySelector('.rsts-next');
+            const prevBtn = document.querySelector('.rsts-prev');
+
+            if (nextBtn && prevBtn) {
+                nextBtn.addEventListener('click', () => {
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                    rotateCube(currentSlide);
+                });
+
+                prevBtn.addEventListener('click', () => {
+                    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                    rotateCube(currentSlide);
+                });
+            }
+        });
+    </script>
+    @endraw
 `
 )
